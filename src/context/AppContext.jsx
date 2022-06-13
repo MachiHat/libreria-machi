@@ -6,7 +6,6 @@ const AppContext = createContext([]);
 export const useAppContext = () => useContext(AppContext);
 
 const AppContextProvider = ({ children }) => {
-  
   // DEFAULT TITLES RANDOMIZER
 
   const bookTitles = [
@@ -63,13 +62,15 @@ const AppContextProvider = ({ children }) => {
 
   const addCart = (bookcard) => {
     setOnCart([...onCart, bookcard]);
-    setCartTotal(cartTotal + bookcard.price)
+    setCartTotal(cartTotal + bookcard.price);
   };
+
   const clearCart = () => {
-    console.log("cartCleared")
+    console.log("cartCleared");
     setOnCart([]);
     setCartTotal(0);
   };
+
 
   return (
     <AppContext.Provider

@@ -1,6 +1,7 @@
 import React from "react";
+import { BsPencil } from "react-icons/bs";
 
-const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
+const BookLib = ({ selectBook, deleteBook, ...bookdata }) => {
   return (
     <div className="card card-compact card-side bg-base-100 shadow-xl max-w-3/4">
       <figure>
@@ -10,11 +11,20 @@ const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
         <h2 className="card-title text-sm md:text-2xl">{bookdata.title}</h2>
         <h3 className="text-xs md:text-lg">{`${bookdata.author}`}</h3>
         <p className="text-xs md:text-base">{`Publicado por ${bookdata.publisher} - ${bookdata.publishedDate}`}</p>
-        <p className="text-xs md:text-base">{`AR$ ${bookdata.price}`}</p>
+        <div className="input-group">
+          <p className="text-xs w-1/2 md:text-base">{bookdata.notes}</p>
+        </div>
         <div className="card-actions justify-end">
+          <label
+            htmlFor="edit-modal"
+            onClick={() => selectBook(bookdata.id)}
+            className="btn btn-secondary btn-circle text-lg"
+          >
+            <BsPencil />
+          </label>
           <button
-            onClick={() => addBookToLib(bookdata)}
-            className="btn btn-secondary btn-sm md:btn-md"
+            onClick={() => deleteBook(bookdata.id)}
+            className="btn btn-danger btn-circle"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -27,15 +37,9 @@ const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
-          <button
-            onClick={() => addCart(bookdata)}
-            className="btn btn-primary btn-sm md:btn-md"
-          >
-            COMPRAR
           </button>
         </div>
       </div>
@@ -43,4 +47,4 @@ const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
   );
 };
 
-export default BookCard;
+export default BookLib;
