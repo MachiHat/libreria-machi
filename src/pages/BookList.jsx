@@ -6,7 +6,7 @@ import { addBookToLib } from "../data/functions";
 
 const BookList = () => {
   const { startSearch, setSearchParams, data, addCart } = useAppContext();
-  
+
   return (
     <div>
       <SearchBar 
@@ -17,6 +17,7 @@ const BookList = () => {
         {data.map((book, i) => (
           <BookCard
             key={i}
+            id={book.id}
             img={book.volumeInfo?.imageLinks?.thumbnail}
             author={book.volumeInfo?.authors}
             title={book.volumeInfo.title}
@@ -25,7 +26,7 @@ const BookList = () => {
             price={book.saleInfo.listPrice?.amount}
             buyLink={book.saleInfo.buyLink}
             addCart={addCart}
-            addBookToLib={addBookToLib}
+            addBook={addBookToLib}
           />
         ))}
       </div>

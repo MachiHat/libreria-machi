@@ -52,6 +52,10 @@ const AppContextProvider = ({ children }) => {
       });
   }, [bookTitle, randomTitle]);
 
+  // Library data
+
+  const [libData, setLibData] = useState([]);
+
   // CART FUNCTIONS & STATES
 
   const [onCart, setOnCart] = useState([]);
@@ -71,7 +75,6 @@ const AppContextProvider = ({ children }) => {
     setCartTotal(0);
   };
 
-
   return (
     <AppContext.Provider
       value={{
@@ -84,7 +87,9 @@ const AppContextProvider = ({ children }) => {
         onCart,
         cartCount,
         clearCart,
-        cartTotal
+        cartTotal,
+        libData,
+        setLibData,
       }}
     >
       {children}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
+const BookCard = ({ addBook, addCart, ...bookdata }) => {
   return (
     <div className="card card-compact card-side bg-base-100 shadow-xl max-w-3/4">
       <figure>
@@ -13,7 +13,7 @@ const BookCard = ({ addBookToLib, addCart, ...bookdata }) => {
         <p className="text-xs md:text-base">{`AR$ ${bookdata.price}`}</p>
         <div className="card-actions justify-end">
           <button
-            onClick={() => addBookToLib(bookdata)}
+            onClick={() => addBook(bookdata)}
             className="btn btn-secondary btn-sm md:btn-md"
           >
             <svg

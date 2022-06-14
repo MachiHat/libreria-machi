@@ -2,20 +2,24 @@ import React, { useState, useEffect } from "react";
 import BookLib from "../components/BookLib";
 import EditNote from "../components/EditNote";
 
+import { useAppContext } from "../context/AppContext";
+
 import {
-  getLibrary,
+  getLib,
   deleteBookFromLib,
   editNoteFromLib,
 } from "../data/functions";
 
 const Library = () => {
-  const [libData, setLibData] = useState([]);
 
+  const {libData, setLibData} = useAppContext();
+
+  
   useEffect(() => {
-    getLibrary().then((res) => {
+    getLib().then((res) => {
       setLibData(res);
     });
-  }, []);
+  }, [setLibData]);
 
   const filterBooks = (bookID) => {
     deleteBookFromLib(bookID);

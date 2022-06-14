@@ -14,7 +14,7 @@ const collectionRef = collection(db, "libreria");
 
 // getting books from lib
 
-export const getLibrary = async () => {
+export const getLib = async () => {
   const snapshot = await getDocs(collectionRef);
   const docs = snapshot.docs;
   const docsArray = [];
@@ -25,7 +25,8 @@ export const getLibrary = async () => {
 // add books to lib
 
 export const addBookToLib = async (bookdata) => {
-  const newData = {
+  const newBookData = {
+    _id: bookdata.id,
     author: bookdata.author,
     publishedDate: bookdata.publishedDate,
     publisher: bookdata.publisher,
@@ -34,7 +35,7 @@ export const addBookToLib = async (bookdata) => {
     notes: "Sin notas...",
   };
   const docRef = doc(collectionRef);
-  await setDoc(docRef, newData);
+  await setDoc(docRef, newBookData);
 };
 
 // edit selected book from lib
