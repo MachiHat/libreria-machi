@@ -1,5 +1,5 @@
-import { useState, useEffect, createContext, useContext } from "react";
-import { API_KEY } from "../data";
+import { useState, createContext, useContext, useEffect } from "react";
+import { getLib } from "../data/functions";
 
 const AppContext = createContext([]);
 
@@ -31,30 +31,15 @@ const AppContextProvider = ({ children }) => {
     e.target.reset();
   };
 
-  // BOOK SEARCH EFFECT AND STATE
-
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${
-        bookTitle ?? randomTitle
-      }&filter=paid-ebooks&langResttrict=es&printType=books&maxResults=10&key=${API_KEY}`
-    )
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setData(data.items);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [bookTitle, randomTitle]);
-
-  // Library data
+  // LIBRARY DATA
 
   const [libData, setLibData] = useState([]);
+
+  useEffect(() => {
+    getLib().then((res) => {
+      setLibData(res);
+    });
+  }, [setLibData]);
 
   // CART FUNCTIONS & STATES
 
@@ -78,18 +63,17 @@ const AppContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        data,
+        randomTitle,
+        bookTitle,
         startSearch,
         setSearchParams,
-        bookTitle,
-        randomTitle,
+        libData,
+        setLibData,
         addCart,
         onCart,
         cartCount,
         clearCart,
         cartTotal,
-        libData,
-        setLibData,
       }}
     >
       {children}

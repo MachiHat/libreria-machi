@@ -24,18 +24,9 @@ export const getLib = async () => {
 
 // add books to lib
 
-export const addBookToLib = async (bookdata) => {
-  const newBookData = {
-    _id: bookdata.id,
-    author: bookdata.author,
-    publishedDate: bookdata.publishedDate,
-    publisher: bookdata.publisher,
-    thumbnail: bookdata.img,
-    title: bookdata.title,
-    notes: "Sin notas...",
-  };
+export const addBookToLib = async (newBook) => {
   const docRef = doc(collectionRef);
-  await setDoc(docRef, newBookData);
+  await setDoc(docRef, newBook);
 };
 
 // edit selected book from lib

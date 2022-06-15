@@ -1,6 +1,6 @@
 import React from "react";
 
-const BookCard = ({ addBook, addCart, ...bookdata }) => {
+const BookCard = ({ addBook, addCart, isFav, isCart, ...bookdata }) => {
   return (
     <div className="card card-compact card-side bg-base-100 shadow-xl max-w-3/4">
       <figure>
@@ -14,7 +14,7 @@ const BookCard = ({ addBook, addCart, ...bookdata }) => {
         <div className="card-actions justify-end">
           <button
             onClick={() => addBook(bookdata)}
-            className="btn btn-secondary btn-sm md:btn-md"
+            className={`btn btn-secondary btn-sm ${isFav(bookdata.id) === true ? 'btn-disabled' : null} md:btn-md `}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ const BookCard = ({ addBook, addCart, ...bookdata }) => {
           </button>
           <button
             onClick={() => addCart(bookdata)}
-            className="btn btn-primary btn-sm md:btn-md"
+            className={`btn btn-primary btn-sm ${isCart(bookdata.id) === true ? 'btn-disabled' : null} md:btn-md`}
           >
             COMPRAR
           </button>
