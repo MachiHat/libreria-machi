@@ -1,29 +1,29 @@
 import React from "react";
 import { BsPencil } from "react-icons/bs";
 
-const BookLib = ({ selectBook, deleteBook, ...bookdata }) => {
+const BookLib = ({ selectBook, deleteBook, ...book }) => {
   return (
     <div className="card card-compact card-side bg-base-100 shadow-xl max-w-3/4">
       <figure>
-        <img className="" src={bookdata.img} alt="BookCover" />
+        <img className="" src={book.book.thumbnail} alt="BookCover" />
       </figure>
       <div className="card-body max-w-3/4">
-        <h2 className="card-title text-sm md:text-2xl">{bookdata.title}</h2>
-        <h3 className="text-xs md:text-lg">{`${bookdata.author}`}</h3>
-        <p className="text-xs md:text-base">{`Publicado por ${bookdata.publisher} - ${bookdata.publishedDate}`}</p>
+        <h2 className="card-title text-sm md:text-2xl">{book.book.title}</h2>
+        <h3 className="text-xs md:text-lg">{`${book.book.author}`}</h3>
+        <p className="text-xs md:text-base">{`Publicado por ${book.book.publisher} - ${book.book.publishedDate}`}</p>
         <div className="input-group">
-          <p className="text-xs w-1/2 md:text-base">{bookdata.notes}</p>
+          <p className="text-xs w-1/2 md:text-base">{book.book.notes}</p>
         </div>
         <div className="card-actions justify-end">
           <label
             htmlFor="edit-modal"
-            onClick={() => selectBook(bookdata.id)}
+            onClick={() => selectBook(book.book.libID)}
             className="btn btn-secondary btn-circle text-lg"
           >
             <BsPencil />
           </label>
           <button
-            onClick={() => deleteBook(bookdata.id)}
+            onClick={() => deleteBook(book.book.libID)}
             className="btn btn-danger btn-circle"
           >
             <svg

@@ -4,7 +4,7 @@ const BookCard = ({ addBook, addCart, isFav, isCart, ...bookdata }) => {
   return (
     <div className="card card-compact card-side bg-base-100 shadow-xl max-w-3/4">
       <figure>
-        <img className="" src={bookdata.img} alt="BookCover" />
+        <img className="" src={bookdata.thumbnail} alt="BookCover" />
       </figure>
       <div className="card-body max-w-3/4">
         <h2 className="card-title text-sm md:text-2xl">{bookdata.title}</h2>

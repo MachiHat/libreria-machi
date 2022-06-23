@@ -1,5 +1,6 @@
 import { useState, createContext, useContext, useEffect } from "react";
-import { getLib } from "../data/functions";
+import axios from "axios";
+import { config } from "../db";
 
 const AppContext = createContext([]);
 
@@ -36,10 +37,38 @@ const AppContextProvider = ({ children }) => {
   const [libData, setLibData] = useState([]);
 
   useEffect(() => {
-    getLib().then((res) => {
-      setLibData(res);
-    });
-  }, [setLibData]);
+    axios({
+      url: config.url,
+      method: "GET",
+      headers: config.headers,
+    })
+      .then((response) => {
+        const pushArray = [];
+        response.data.data.forEach((data) => {
+          const newData = {
+            libID: data.id,
+            bookID: data.tax_id,
+            publisher: data.first_name,
+            publishedDate: data.last_name,
+            author: data.email,
+            thumbnail: data.json_data?.replace(/['"]+/g, ''),
+            title: data.name,
+            notes: data.description,
+          };
+          console.log(newData);
+          pushArray.push(newData);
+        });
+        setLibData(pushArray);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response) {
+          console.error(error.response.headers);
+          console.error(error.response.data);
+          console.error(error.response.status);
+        }
+      });
+  }, []);
 
   // CART FUNCTIONS & STATES
 
