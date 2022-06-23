@@ -55,7 +55,6 @@ const AppContextProvider = ({ children }) => {
             title: data.name,
             notes: data.description,
           };
-          console.log(newData);
           pushArray.push(newData);
         });
         setLibData(pushArray);

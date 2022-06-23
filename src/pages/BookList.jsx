@@ -40,9 +40,11 @@ const BookList = () => {
 
   // ADD BOOKS LOCALLY & SENDS TO FIRESTORE FUNCTION
 
-  const addBookHandler = (bookdata) => {
+  const addBookHandler = async (bookdata) => {
     console.log("sending book to lib", bookdata);
+    const id = await addBook(bookdata);
     const newBook = {
+      libID : id,
       bookID: bookdata.id,
       author: bookdata.author,
       publishedDate: bookdata.publishedDate,
@@ -51,7 +53,6 @@ const BookList = () => {
       title: bookdata.title,
       notes: "Sin notas...",
     };
-    addBook(bookdata);
     setLibData([...libData, newBook]);
   };
 
